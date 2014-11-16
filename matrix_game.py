@@ -2,42 +2,42 @@ import numpy as np
 import time
 
 
-def shift_matrix_up(m):
-    return np.vstack((m[1:], m[0]))
+def rotate_u(matrix):
+    return np.vstack((matrix[1:], matrix[0]))
 
 
-def shift_matrix_down(m):
-    return np.vstack((m[-1], m[:-1]))
+def rotate_d(matrix):
+    return np.vstack((matrix[-1], matrix[:-1]))
 
 
-def shift_matrix_right(m):
-    return np.hstack((m[:, -1].reshape(-1, 1), m[:, :-1]))
+def rotate_l(matrix):
+    return np.hstack((matrix[:, 1:], matrix[:, 0].reshape(-1, 1)))
 
 
-def shift_matrix_left(m):
-    return np.hstack((m[:, 1:], m[:, 0].reshape(-1, 1)))
+def rotate_r(matrix):
+    return np.hstack((matrix[:, -1].reshape(-1, 1), matrix[:, :-1]))
 
 
 def vertical_collector(dimension):
     ii = np.identity(dimension, dtype=int)
-    return shift_matrix_down(ii) + shift_matrix_up(ii)
+    return rotate_d(ii) + rotate_u(ii)
 
 
-def collect_live_neighbors(state):
+def neighbor_transform(state):
     operator = vertical_collector(state.shape[0])
 
     verticals = np.dot(operator, state)
     horizontals = np.dot(state, operator)
-    left_diags = np.dot(operator, shift_matrix_right(state))
-    right_diags = np.dot(operator, shift_matrix_left(state))
+    left_diags = np.dot(operator, rotate_r(state))
+    right_diags = np.dot(operator, rotate_l(state))
     return horizontals + verticals + left_diags + right_diags
 
 
 def advance(state):
-    neighbors = collect_live_neighbors(state)
-    sum_rule = np.array(state + neighbors == 3, dtype=int)
-    product_rule = np.array(state * neighbors == 3, dtype=int)
-    return sum_rule | product_rule
+    neighbor_sum = neighbor_transform(state)
+    sum_rule = state + neighbor_sum == 3
+    product_rule = state * neighbor_sum == 3
+    return np.array(sum_rule | product_rule, dtype=int)
 
 
 def random_state(dimension):
