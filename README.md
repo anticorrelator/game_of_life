@@ -2,7 +2,7 @@
 
 Neato implementation of Conway's game of life.
 
-To play:
+### To play:
 
 1. ```git clone https://github.com/anticorrelator/game_of_life.git```
 2. ```cd game_of_life```
@@ -10,4 +10,4 @@ To play:
 3. ```brew install python3```
 4. ```pip3 install numpy```
 5. ```chmod +x life```
-6. ```./life [game_dimension]```
+6. ```./life [integer_game_dimension]```
