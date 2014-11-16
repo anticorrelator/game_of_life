@@ -2,14 +2,6 @@ import numpy as np
 import time
 
 
-def rotate_u(matrix):
-    return np.vstack((matrix[1:], matrix[0]))
-
-
-def rotate_d(matrix):
-    return np.vstack((matrix[-1], matrix[:-1]))
-
-
 def rotate_l(matrix):
     return np.hstack((matrix[:, 1:], matrix[:, 0].reshape(-1, 1)))
 
@@ -20,7 +12,7 @@ def rotate_r(matrix):
 
 def vertical_collector(dimension):
     ii = np.identity(dimension, dtype=int)
-    return rotate_d(ii) + rotate_u(ii)
+    return rotate_l(ii) + rotate_r(ii)
 
 
 def neighbor_transform(state):
