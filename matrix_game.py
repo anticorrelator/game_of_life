@@ -46,6 +46,8 @@ def random_state(dimension):
 
 def draw(state):
     draw_map = {0: " ", 1: "X"}
+    print('\x1b[2J')
+    print("-" * (state.shape[0] * 2 - 1))
     for row in state:
         print(str.join(" ", [draw_map[e] for e in row]))
     print("-" * (state.shape[0] * 2 - 1))
