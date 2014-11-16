@@ -1,0 +1,7 @@
+#!/usr/local/bin/python3
+
+import sys
+import matrix_game as g
+
+dimension = int(sys.argv[1])
+g.random_play(dimension)
