@@ -9,5 +9,5 @@ Neato implementation of Conway's game of life.
 2. Install [homebrew](http://brew.sh)
 3. ```brew install python3```
 4. ```pip3 install numpy```
-5. ```chmod +x life```
+5. ```sudo chmod +x life```
 6. ```./life [integer_game_dimension]```
