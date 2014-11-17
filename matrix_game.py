@@ -53,8 +53,4 @@ def play(state):
 
 
 def random_play(dimension):
-    state = random_state(dimension)
-    while True:
-        state = advance(state)
-        draw(state)
-        time.sleep(.1)
+    play(random_state(dimension))
