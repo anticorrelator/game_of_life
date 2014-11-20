@@ -47,8 +47,8 @@ def draw(state):
 
 def play(state):
     while True:
-        state = advance(state)
         draw(state)
+        state = advance(state)
         time.sleep(.1)
 
 
